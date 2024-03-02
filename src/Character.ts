@@ -82,9 +82,7 @@ export default class Character implements Fighter {
   }
 
   attack(enemy: SimpleFighter): void {
-    if (this._energy.amount > 1) {
-      enemy.receiveDamage(this._strength);
-    }
+    enemy.receiveDamage(this._strength);
     this.useEnergy(1);
   }
 
@@ -107,7 +105,7 @@ export default class Character implements Fighter {
 
   receiveDamage(attackPoints: number): number {
     const damage = attackPoints - this._defense;
-    if (damage > 0) {
+    if (damage > 0 && this._energy.amount > 1) {
       this._lifePoints -= damage;
     } else if (damage <= 0) {
       this._lifePoints -= 1;
