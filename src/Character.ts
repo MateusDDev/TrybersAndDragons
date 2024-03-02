@@ -82,7 +82,9 @@ export default class Character implements Fighter {
   }
 
   attack(enemy: SimpleFighter): void {
-    enemy.receiveDamage(this._strength);
+    if (this._energy.amount > 1) {
+      enemy.receiveDamage(this._strength);
+    }
     this.useEnergy(1);
   }
 
@@ -91,7 +93,7 @@ export default class Character implements Fighter {
     const doubleAttack = (this._strength * 2) + breakDefense;
 
     enemy.receiveDamage(doubleAttack);
-    this.useEnergy(6);
+    this.useEnergy(5);
   }
 
   levelUp(): void {
